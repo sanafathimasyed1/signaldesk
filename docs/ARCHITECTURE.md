@@ -8,7 +8,7 @@
 
 `static/` is a dependency-free responsive workbench with search, observed-country / segment / priority filters, pagination, evidence detail, analyst disposition, explicit attribution caveat, CSV shortlist export, and Activity/AI traces. It does not link to or probe observed ports or IPs. PythonAnywhere deployment is prepared but not executed; no hosted link is claimed.
 
-`wsgi.py` provides a standard-library WSGI transport that reuses the existing handler routes and policies. `pythonanywhere_wsgi.py` exports the callable for the host and loads credentials from a private JSON file outside the repository. Hosted workers use Python 3.10+, serve the checked-in sample without the compressed-source importer, and retain SQLite under the account home directory. The free-host configuration explicitly disables live AI because outbound provider access is not assumed.
+`flask_app.py` exposes a Flask application factory and explicit UI/API routes, forwarding their original request streams to `wsgi.py` to reuse the existing handler validation, authentication and policies. Flask automatic public static serving is disabled. `pythonanywhere_wsgi.py` exports the Flask callable for the host and loads credentials from a private JSON file outside the repository. Hosted workers use Python 3.10+ with Flask installed in a virtualenv, serve the checked-in sample without the compressed-source importer, and retain SQLite under the account home directory. The free-host configuration explicitly disables live AI because outbound provider access is not assumed.
 
 ## Rules versus LLM
 

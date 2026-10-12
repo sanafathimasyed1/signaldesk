@@ -17,6 +17,6 @@ os.environ["SIGNALDESK_DB"] = str(home / ".signaldesk" / "signaldesk.sqlite")
 os.environ.pop("OPENAI_API_KEY", None)
 
 sys.path.insert(0, str(project))
-from wsgi import create_application
+from flask_app import create_app
 
-application = create_application()
+application = create_app()

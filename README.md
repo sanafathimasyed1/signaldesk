@@ -4,9 +4,10 @@ A local-first, explainable cybersecurity account-research workbench. It reads a 
 
 ## Start locally
 
-Python **3.10+** can run the app with the checked-in sample; no packages are needed. Only re-importing the compressed source requires **Python 3.14+** for standard-library `compression.zstd`.
+Python **3.10+** can run the app with the checked-in sample. Install `requirements.txt` for Flask hosting and the complete test suite. The original local server is still standard-library-only. Re-importing the compressed source requires **Python 3.14+** for standard-library `compression.zstd`.
 
 ```powershell
+python -m pip install -r requirements.txt
 python main.py
 ```
 
@@ -31,6 +32,6 @@ Offline evaluation runs both prompt/policy versions on 24 synthetic cases and co
 
 ## Hosting and remaining deliverables
 
-PythonAnywhere hosting is prepared with a dependency-free WSGI adapter (`wsgi.py`), a Web-tab configuration template (`pythonanywhere_wsgi.py`), reviewer password protection, persistent SQLite under your account's home directory, and a public non-sensitive healthcheck. Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md). **No hosted URL is claimed until you actually deploy.** Hosting requires a 16+ character `SIGNALDESK_PASSWORD` and HTTPS. The free-hosting template deliberately disables live AI; outbound provider access is restricted on free accounts. This is one shared reviewer workspace, not an enterprise multiuser service.
+PythonAnywhere hosting is prepared with a Flask application factory (`flask_app.create_app`), a shared API adapter (`wsgi.py`), a Web-tab configuration template (`pythonanywhere_wsgi.py`), reviewer password protection, persistent SQLite under your account's home directory, and a public non-sensitive healthcheck. Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to install Flask in a virtualenv and configure WSGI. **No hosted URL is claimed until you actually deploy.** Hosting requires a 16+ character `SIGNALDESK_PASSWORD` and HTTPS. The free-hosting template deliberately disables live AI; outbound provider access is restricted on free accounts. This is one shared reviewer workspace, not an enterprise multiuser service.
 
 A blind 24-case real-data packet and blank review sheet are in `evals/human-review/`; see [`evals/HUMAN_REVIEW.md`](evals/HUMAN_REVIEW.md). Human labels and live-model measurements are still pending. Import your completed labels using `python evals\human_review.py import`, then run the harness with `--dataset evals\human-review\human-labeled.jsonl --mode live`. Hosting and preparation do not complete those requirements by themselves. `docs/HOW_WE_BUILD.md` explains the development loop and limitations.
