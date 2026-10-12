@@ -2,6 +2,17 @@
 
 A local-first, explainable cybersecurity account-research workbench. It reads a real sample from the provided passive service-observation dataset, ranks *candidate* domain clusters for **human validation**, stores researcher dispositions and local AI traces, and exports selected research candidates. It does **not** infer company size, headquarters, industry, identity ownership, purchase intent, or vulnerability. It does not scan or contact companies.
 
+## Hosted demo
+
+**App:** <https://sanasyed.pythonanywhere.com>  
+**Source:** <https://github.com/sanafathimasyed1/signaldesk>
+
+Open the app in a browser and sign in with username **`reviewer`** and the unique demo password provided privately in the submission email. No installation, API key, labelling or evaluation commands are required for the assessor. Passwords are not published in this repository.
+
+The demo supports account search, observed-country / service-segment / priority filters, evidence and score details, saved research dispositions and notes, shortlist CSV export, and cautious outreach templates. It is a shared review workspace; credential holders can see and edit the same notes. Do not enter confidential data.
+
+**AI disclosure:** the hosted app uses deterministic offline rules, not live LLM calls. The recorded evaluation uses AI-authored synthetic cases; independent human labels and live-model measurements remain pending. The optional live LLM integration is available in the source but is disabled in the free-hosting configuration.
+
 ## Start locally
 
 Python **3.10+** can run the app with the checked-in sample. Install `requirements.txt` for Flask hosting and the complete test suite. The original local server is still standard-library-only. Re-importing the compressed source requires **Python 3.14+** for standard-library `compression.zstd`.
@@ -28,10 +39,10 @@ python -m unittest discover -s tests -v
 python evals\run.py --mode offline
 ```
 
-Offline evaluation runs both prompt/policy versions on 24 synthetic cases and compares v2 against the preceding run. The measured run: v1 **45.8% accuracy / 0.360 macro-F1**; v2 **100% / 1.000** on these cases. That perfect score reflects labels encoding the same v2 policy; they are AI-authored, not independent human judgments or real customer data. It tests deterministic rules, **not a live language model**. See `skills/evidence-triage/SKILL.md` for inputs, output schema, triggers, limits and examples. Detailed traces are in local SQLite. No host, live LLM benchmark, independent human-labeled customers, or Loom link are represented as completed.
+Offline evaluation runs both prompt/policy versions on 24 synthetic cases and compares v2 against the preceding run. The measured run: v1 **45.8% accuracy / 0.360 macro-F1**; v2 **100% / 1.000** on these cases. That perfect score reflects labels encoding the same v2 policy; they are AI-authored, not independent human judgments or real customer data. It tests deterministic rules, **not a live language model**. See `skills/evidence-triage/SKILL.md` for inputs, output schema, triggers, limits and examples. Detailed traces are stored in the workspace's SQLite database. No live LLM benchmark, independent human-labeled customers, or Loom link is represented as completed.
 
 ## Hosting and remaining deliverables
 
-PythonAnywhere hosting is prepared with a Flask application factory (`flask_app.create_app`), a shared API adapter (`wsgi.py`), a Web-tab configuration template (`pythonanywhere_wsgi.py`), reviewer password protection, persistent SQLite under your account's home directory, and a public non-sensitive healthcheck. Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to install Flask in a virtualenv and configure WSGI. **No hosted URL is claimed until you actually deploy.** Hosting requires a 16+ character `SIGNALDESK_PASSWORD` and HTTPS. The free-hosting template deliberately disables live AI; outbound provider access is restricted on free accounts. This is one shared reviewer workspace, not an enterprise multiuser service.
+The demo is hosted on PythonAnywhere using a Flask application factory (`flask_app.create_app`), a shared API adapter (`wsgi.py`), reviewer password protection, persistent SQLite under the hosting account's home directory, and a public non-sensitive healthcheck. [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) documents setup and redeployment; `pythonanywhere_wsgi.py` is the configuration template. Hosting requires a 16+ character `SIGNALDESK_PASSWORD` and HTTPS. Free PythonAnywhere sites need periodic renewal by their owner; maintain the site during the assessment period. This is one shared reviewer workspace, not an enterprise multiuser service.
 
 A blind 24-case real-data packet and blank review sheet are in `evals/human-review/`; see [`evals/HUMAN_REVIEW.md`](evals/HUMAN_REVIEW.md). Human labels and live-model measurements are still pending. Import your completed labels using `python evals\human_review.py import`, then run the harness with `--dataset evals\human-review\human-labeled.jsonl --mode live`. Hosting and preparation do not complete those requirements by themselves. `docs/HOW_WE_BUILD.md` explains the development loop and limitations.
