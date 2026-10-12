@@ -1,0 +1,1303 @@
+{
+  "evaluated_at": "2026-10-11T18:31:34.648934+00:00",
+  "mode": "offline",
+  "corpus": "labeled-v1.jsonl",
+  "corpus_caveat": "Illustrative rule-policy cases, authored/reviewed by AI coding agent; not independent human labels, real customers, production traffic, or measured LLM outputs.",
+  "prompts": {
+    "v1": {
+      "prompt_version": "v1",
+      "mode": "offline",
+      "failures_including_errors": 13,
+      "metrics": {
+        "accuracy": 0.4583,
+        "macro_f1": 0.3602,
+        "n": 24,
+        "classes": {
+          "review": {
+            "precision": 0.4091,
+            "recall": 1.0,
+            "f1": 0.5806,
+            "support": 9
+          },
+          "research": {
+            "precision": 0,
+            "recall": 0.0,
+            "f1": 0,
+            "support": 9
+          },
+          "monitor": {
+            "precision": 1.0,
+            "recall": 0.3333,
+            "f1": 0.5,
+            "support": 6
+          }
+        }
+      },
+      "results": [
+        {
+          "id": "E01",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e01"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Current high-weight database-port clue for an unverified customer domain deserves human validation only.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e01"
+          ],
+          "trace_id": "c4b7300b841a4c4aac1b9eb74fef1a77",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E02",
+          "eligible": false,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e02"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Could be a provider or ambiguous hosting record; identify the service owner before considering a sales account.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e02"
+          ],
+          "trace_id": "8f4783a0f60c42aa88f8f7af0a001bd5",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E03",
+          "eligible": true,
+          "age_days": 3,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "remote-access",
+              "kind": "remote-access",
+              "weight": 25,
+              "evidence_ids": [
+                "e03"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Recent remote-access metadata merits validation of the asset owner and controls, not a breach claim.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e03"
+          ],
+          "trace_id": "a65a7e1538464e669a603bceded7aad6",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E04",
+          "eligible": true,
+          "age_days": 7,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "verified-cve",
+              "kind": "verified-cve",
+              "weight": 35,
+              "evidence_ids": [
+                "e04"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "A current source-verified CVE flag is still only a clue and needs human corroboration.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e04"
+          ],
+          "trace_id": "8b61aa0053d549b491ac58a43cd44c36",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E05",
+          "eligible": true,
+          "age_days": 1,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "expired-cert",
+              "kind": "expired-cert",
+              "weight": 15,
+              "evidence_ids": [
+                "e05"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Certificate expiry is a weaker current operational clue, not proof of attack surface vulnerability.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e05"
+          ],
+          "trace_id": "60aa47aa5032470088eccfed84307009",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E06",
+          "eligible": true,
+          "age_days": 4,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "legacy-tls",
+              "kind": "legacy-tls",
+              "weight": 15,
+              "evidence_ids": [
+                "e06"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Positive legacy-TLS metadata is weak; corroborate configuration and ownership.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e06"
+          ],
+          "trace_id": "4c81af984c0c45078ad41a87ead2a48a",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E07",
+          "eligible": true,
+          "age_days": 8,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e07"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Evidence is within 30 days and has a current positive weight; seven-day freshness affects score but not the review threshold.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e07"
+          ],
+          "trace_id": "e18282e2b37644c5bf89ba8358d0a7e6",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E08",
+          "eligible": true,
+          "age_days": 29,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e08"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "The 30-day action window still allows a human review of a higher-weight clue.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e08"
+          ],
+          "trace_id": "680bda7aacb44538a5f15ac6fbdb425d",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E09",
+          "eligible": true,
+          "age_days": 30,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e09"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Boundary: exactly 30 days is inside the review window.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e09"
+          ],
+          "trace_id": "74404ddc62044dca8a9d27bd3f6161db",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E10",
+          "eligible": true,
+          "age_days": 31,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e10"
+              ]
+            }
+          ],
+          "expected": "monitor",
+          "why": "Stale evidence should not trigger outreach or an elevated review decision.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e10"
+          ],
+          "trace_id": "b3310a90688848d0bed47994e719a02b",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E11",
+          "eligible": true,
+          "age_days": -2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e11"
+              ]
+            }
+          ],
+          "expected": "monitor",
+          "why": "Future-dated observations are invalid for a current recommendation.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e11"
+          ],
+          "trace_id": "309f269a7af8456192edf940fdb50b52",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E12",
+          "eligible": true,
+          "age_days": null,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e12"
+              ]
+            }
+          ],
+          "expected": "monitor",
+          "why": "Missing timestamp means recency cannot be validated.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e12"
+          ],
+          "trace_id": "8722cadd92ec4b6d91d53b3177ec2269",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E13",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [],
+          "expected": "monitor",
+          "why": "No evidence: do not manufacture an urgency signal.",
+          "decision": "monitor",
+          "accepted": true,
+          "evidence_ids": [],
+          "trace_id": "0d4c4aad5d744fe18c0270276e8c2e90",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E14",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "reported-cve",
+              "kind": "reported-cve",
+              "weight": 5,
+              "evidence_ids": [
+                "e14"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Unverified CVE metadata must not be represented as a verified vulnerability.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e14"
+          ],
+          "trace_id": "986c9d1419494389b45f34a82bcaed11",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E15",
+          "eligible": false,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "reported-cve",
+              "kind": "reported-cve",
+              "weight": 5,
+              "evidence_ids": [
+                "e15"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Unverified attribution is a research hold even if a source reports an issue.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e15"
+          ],
+          "trace_id": "ea1ee4326e2b4a8c88343aa141a9a63b",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E16",
+          "eligible": false,
+          "age_days": null,
+          "ownership_verified": false,
+          "signals": [],
+          "expected": "monitor",
+          "why": "An unattributed observation with no current signal is not a sales target.",
+          "decision": "monitor",
+          "accepted": true,
+          "evidence_ids": [],
+          "trace_id": "abe0a6cfaa3a4ba5ab66cf59b82cc551",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E17",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "expired-cert",
+              "kind": "expired-cert",
+              "weight": 15,
+              "evidence_ids": [
+                "e17"
+              ]
+            },
+            {
+              "id": "legacy-tls",
+              "kind": "legacy-tls",
+              "weight": 15,
+              "evidence_ids": [
+                "e17"
+              ]
+            },
+            {
+              "id": "reported-cve",
+              "kind": "reported-cve",
+              "weight": 5,
+              "evidence_ids": [
+                "e17"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Several weak clues must not accumulate into high-priority review.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e17"
+          ],
+          "trace_id": "100a529af5ea42679ce9c54333aefe45",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E18",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 0,
+              "evidence_ids": [
+                "e18"
+              ]
+            }
+          ],
+          "expected": "monitor",
+          "why": "A stale zero-weight clue is not current despite the account-level timestamp.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e18"
+          ],
+          "trace_id": "cc72ae2c7d5849e7b74593c02fbe98a5",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E19",
+          "eligible": true,
+          "age_days": 1,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "expired-cert",
+              "kind": "expired-cert",
+              "weight": 0,
+              "evidence_ids": [
+                "e19"
+              ]
+            },
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e19"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "A separate stronger fresh signal can merit review when a second signal is stale.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e19"
+          ],
+          "trace_id": "dc125e09f463435883ca90930e7c2978",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E20",
+          "eligible": true,
+          "age_days": 12,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "remote-access",
+              "kind": "remote-access",
+              "weight": 25,
+              "evidence_ids": [
+                "e20"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Current higher-weight evidence qualifies for review while still requiring identity and access-control validation.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e20"
+          ],
+          "trace_id": "aaac7437195f401bb9f65ce3ee62cbc3",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E21",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "expired-cert",
+              "kind": "expired-cert",
+              "weight": 15,
+              "evidence_ids": [
+                "e21"
+              ]
+            },
+            {
+              "id": "legacy-tls",
+              "kind": "legacy-tls",
+              "weight": 15,
+              "evidence_ids": [
+                "e21"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Multiple configuration observations remain weak, not purchase-intent evidence.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e21"
+          ],
+          "trace_id": "34e3e8d1d7e04fb5a8c88e50782b3c11",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E22",
+          "eligible": false,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "remote-access",
+              "kind": "remote-access",
+              "weight": 25,
+              "evidence_ids": [
+                "e22"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Strong service evidence cannot resolve whether the domain belongs to a customer or a hosting provider.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e22"
+          ],
+          "trace_id": "908bf587a88b48a5825c4199eb984ead",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E23",
+          "eligible": true,
+          "age_days": 3,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e23"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Higher-value passive evidence supports analyst validation but cannot establish access or a vulnerability.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e23"
+          ],
+          "trace_id": "b25c4f555dff445e960e5cdcfe71d0d1",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E24",
+          "eligible": true,
+          "age_days": 25,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "expired-cert",
+              "kind": "expired-cert",
+              "weight": 15,
+              "evidence_ids": [
+                "e24"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Recent certificate metadata warrants light corroboration rather than an urgent pitch.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e24"
+          ],
+          "trace_id": "55974eea6c9a4901888e8fa2cabdc930",
+          "cost_usd": 0.0
+        }
+      ],
+      "unsupported_evidence_ids": 0,
+      "acceptance_rate": 1.0,
+      "cost_usd": 0.0
+    },
+    "v2": {
+      "prompt_version": "v2",
+      "mode": "offline",
+      "failures_including_errors": 0,
+      "metrics": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
+        "n": 24,
+        "classes": {
+          "review": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 9
+          },
+          "research": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 9
+          },
+          "monitor": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 6
+          }
+        }
+      },
+      "results": [
+        {
+          "id": "E01",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e01"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Current high-weight database-port clue for an unverified customer domain deserves human validation only.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e01"
+          ],
+          "trace_id": "ebeae4877b754eb9a1d22c2022f6b12c",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E02",
+          "eligible": false,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e02"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Could be a provider or ambiguous hosting record; identify the service owner before considering a sales account.",
+          "decision": "research",
+          "accepted": true,
+          "evidence_ids": [
+            "e02"
+          ],
+          "trace_id": "eedb1bfbf9774f4daf77608adfa0bcb5",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E03",
+          "eligible": true,
+          "age_days": 3,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "remote-access",
+              "kind": "remote-access",
+              "weight": 25,
+              "evidence_ids": [
+                "e03"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Recent remote-access metadata merits validation of the asset owner and controls, not a breach claim.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e03"
+          ],
+          "trace_id": "022e307fe4c34081aba6a720a12f2bfd",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E04",
+          "eligible": true,
+          "age_days": 7,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "verified-cve",
+              "kind": "verified-cve",
+              "weight": 35,
+              "evidence_ids": [
+                "e04"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "A current source-verified CVE flag is still only a clue and needs human corroboration.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e04"
+          ],
+          "trace_id": "5a93a0171d1d4eb9b7e712005d25ca30",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E05",
+          "eligible": true,
+          "age_days": 1,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "expired-cert",
+              "kind": "expired-cert",
+              "weight": 15,
+              "evidence_ids": [
+                "e05"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Certificate expiry is a weaker current operational clue, not proof of attack surface vulnerability.",
+          "decision": "research",
+          "accepted": true,
+          "evidence_ids": [
+            "e05"
+          ],
+          "trace_id": "b79ac0786e484f50b260b3ae0c6afdac",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E06",
+          "eligible": true,
+          "age_days": 4,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "legacy-tls",
+              "kind": "legacy-tls",
+              "weight": 15,
+              "evidence_ids": [
+                "e06"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Positive legacy-TLS metadata is weak; corroborate configuration and ownership.",
+          "decision": "research",
+          "accepted": true,
+          "evidence_ids": [
+            "e06"
+          ],
+          "trace_id": "9772081911fc400a83081daea60a1a02",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E07",
+          "eligible": true,
+          "age_days": 8,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e07"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Evidence is within 30 days and has a current positive weight; seven-day freshness affects score but not the review threshold.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e07"
+          ],
+          "trace_id": "06d99501a6d541b8bc83563a95a5fe98",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E08",
+          "eligible": true,
+          "age_days": 29,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e08"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "The 30-day action window still allows a human review of a higher-weight clue.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e08"
+          ],
+          "trace_id": "d9ee2e2d0e594f36990c358b9300fb18",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E09",
+          "eligible": true,
+          "age_days": 30,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e09"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Boundary: exactly 30 days is inside the review window.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e09"
+          ],
+          "trace_id": "361938c7157c4907a2f1093cc251e29f",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E10",
+          "eligible": true,
+          "age_days": 31,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e10"
+              ]
+            }
+          ],
+          "expected": "monitor",
+          "why": "Stale evidence should not trigger outreach or an elevated review decision.",
+          "decision": "monitor",
+          "accepted": true,
+          "evidence_ids": [
+            "e10"
+          ],
+          "trace_id": "d3adf36054d449eea23cd0593de2baba",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E11",
+          "eligible": true,
+          "age_days": -2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e11"
+              ]
+            }
+          ],
+          "expected": "monitor",
+          "why": "Future-dated observations are invalid for a current recommendation.",
+          "decision": "monitor",
+          "accepted": true,
+          "evidence_ids": [
+            "e11"
+          ],
+          "trace_id": "57fe59c6c9f446e1ab9ece58b3ce745c",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E12",
+          "eligible": true,
+          "age_days": null,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e12"
+              ]
+            }
+          ],
+          "expected": "monitor",
+          "why": "Missing timestamp means recency cannot be validated.",
+          "decision": "monitor",
+          "accepted": true,
+          "evidence_ids": [
+            "e12"
+          ],
+          "trace_id": "f79c02b80c754c21a969eefb90d2024d",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E13",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [],
+          "expected": "monitor",
+          "why": "No evidence: do not manufacture an urgency signal.",
+          "decision": "monitor",
+          "accepted": true,
+          "evidence_ids": [],
+          "trace_id": "aab8f4dae782474e9b039b3c9077115e",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E14",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "reported-cve",
+              "kind": "reported-cve",
+              "weight": 5,
+              "evidence_ids": [
+                "e14"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Unverified CVE metadata must not be represented as a verified vulnerability.",
+          "decision": "research",
+          "accepted": true,
+          "evidence_ids": [
+            "e14"
+          ],
+          "trace_id": "b994e3f3a4d744cd96be51d77a543853",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E15",
+          "eligible": false,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "reported-cve",
+              "kind": "reported-cve",
+              "weight": 5,
+              "evidence_ids": [
+                "e15"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Unverified attribution is a research hold even if a source reports an issue.",
+          "decision": "research",
+          "accepted": true,
+          "evidence_ids": [
+            "e15"
+          ],
+          "trace_id": "dbfd114e27f54ec38c85aef5de94d49d",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E16",
+          "eligible": false,
+          "age_days": null,
+          "ownership_verified": false,
+          "signals": [],
+          "expected": "monitor",
+          "why": "An unattributed observation with no current signal is not a sales target.",
+          "decision": "monitor",
+          "accepted": true,
+          "evidence_ids": [],
+          "trace_id": "e7e6c177c3c347fe86b53a5b52c45e02",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E17",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "expired-cert",
+              "kind": "expired-cert",
+              "weight": 15,
+              "evidence_ids": [
+                "e17"
+              ]
+            },
+            {
+              "id": "legacy-tls",
+              "kind": "legacy-tls",
+              "weight": 15,
+              "evidence_ids": [
+                "e17"
+              ]
+            },
+            {
+              "id": "reported-cve",
+              "kind": "reported-cve",
+              "weight": 5,
+              "evidence_ids": [
+                "e17"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Several weak clues must not accumulate into high-priority review.",
+          "decision": "research",
+          "accepted": true,
+          "evidence_ids": [
+            "e17"
+          ],
+          "trace_id": "3895aa38f592461daa00a68cfab5a28a",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E18",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 0,
+              "evidence_ids": [
+                "e18"
+              ]
+            }
+          ],
+          "expected": "monitor",
+          "why": "A stale zero-weight clue is not current despite the account-level timestamp.",
+          "decision": "monitor",
+          "accepted": true,
+          "evidence_ids": [
+            "e18"
+          ],
+          "trace_id": "4c2b4874e5ea43eb93372c5024091fe7",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E19",
+          "eligible": true,
+          "age_days": 1,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "expired-cert",
+              "kind": "expired-cert",
+              "weight": 0,
+              "evidence_ids": [
+                "e19"
+              ]
+            },
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e19"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "A separate stronger fresh signal can merit review when a second signal is stale.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e19"
+          ],
+          "trace_id": "ad43b3b9356e4f8b8507ea9573dc7e49",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E20",
+          "eligible": true,
+          "age_days": 12,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "remote-access",
+              "kind": "remote-access",
+              "weight": 25,
+              "evidence_ids": [
+                "e20"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Current higher-weight evidence qualifies for review while still requiring identity and access-control validation.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e20"
+          ],
+          "trace_id": "37730616017f4a508ae9268e307aa859",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E21",
+          "eligible": true,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "expired-cert",
+              "kind": "expired-cert",
+              "weight": 15,
+              "evidence_ids": [
+                "e21"
+              ]
+            },
+            {
+              "id": "legacy-tls",
+              "kind": "legacy-tls",
+              "weight": 15,
+              "evidence_ids": [
+                "e21"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Multiple configuration observations remain weak, not purchase-intent evidence.",
+          "decision": "research",
+          "accepted": true,
+          "evidence_ids": [
+            "e21"
+          ],
+          "trace_id": "034b2653af8f46ed9db5598c14eab395",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E22",
+          "eligible": false,
+          "age_days": 2,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "remote-access",
+              "kind": "remote-access",
+              "weight": 25,
+              "evidence_ids": [
+                "e22"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Strong service evidence cannot resolve whether the domain belongs to a customer or a hosting provider.",
+          "decision": "research",
+          "accepted": true,
+          "evidence_ids": [
+            "e22"
+          ],
+          "trace_id": "47241eb8310540a980184a2361421305",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E23",
+          "eligible": true,
+          "age_days": 3,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "data-service",
+              "kind": "data-service",
+              "weight": 30,
+              "evidence_ids": [
+                "e23"
+              ]
+            }
+          ],
+          "expected": "review",
+          "why": "Higher-value passive evidence supports analyst validation but cannot establish access or a vulnerability.",
+          "decision": "review",
+          "accepted": true,
+          "evidence_ids": [
+            "e23"
+          ],
+          "trace_id": "0a8e97afb4a44edf9ccd5e4048090448",
+          "cost_usd": 0.0
+        },
+        {
+          "id": "E24",
+          "eligible": true,
+          "age_days": 25,
+          "ownership_verified": false,
+          "signals": [
+            {
+              "id": "expired-cert",
+              "kind": "expired-cert",
+              "weight": 15,
+              "evidence_ids": [
+                "e24"
+              ]
+            }
+          ],
+          "expected": "research",
+          "why": "Recent certificate metadata warrants light corroboration rather than an urgent pitch.",
+          "decision": "research",
+          "accepted": true,
+          "evidence_ids": [
+            "e24"
+          ],
+          "trace_id": "a4b097d6479140efa3e4a933773767a5",
+          "cost_usd": 0.0
+        }
+      ],
+      "unsupported_evidence_ids": 0,
+      "acceptance_rate": 1.0,
+      "cost_usd": 0.0
+    }
+  },
+  "v2_delta_from_previous": {
+    "previous_evaluated_at": "2026-10-11T18:29:37.205260+00:00",
+    "accuracy": 0.0,
+    "macro_f1": 0.0
+  }
+}

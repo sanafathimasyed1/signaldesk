@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111a24">
+  <title>SignalDesk — Account intelligence</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="SignalDesk home">
+        <span class="brand-mark">S</span><span>signal<span class="brand-light">desk</span></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav aria-label="Main navigation">
+        <button class="nav-link active" data-view="overview" aria-current="page">
+          <span class="nav-icon">◫</span>Account signals
+        </button>
+        <button class="nav-link" data-view="activity"><span class="nav-icon">◷</span>Activity &amp; AI traces</button>
+      </nav>
+      <div class="sidebar-guide">
+        <span class="guide-icon" aria-hidden="true">◎</span>
+        <strong>Evidence over guesswork.</strong>
+        <p>Find a signal. Validate the owner. Start the right conversation.</p>
+        <span class="guide-label">HUMAN-REVIEWED INTELLIGENCE</span>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="profile-mark">SD</div>
+        <div><strong>Sales research</strong><small>Local workspace</small></div>
+        <span class="profile-dots" aria-hidden="true">···</span>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><span class="breadcrumb">Workspace <span aria-hidden="true">/</span> <strong>Sales intelligence</strong></span><div class="snapshot-label"><span class="source-pulse"></span> Snapshot <span id="source-date">Loading</span></div>
+        <span class="ai-chip"><span class="ai-dot"></span><span id="mode-label">AI status</span></span>
+      </header>
+      <section id="error-banner" class="error-banner" role="alert" hidden></section>
+      <section id="overview-view">
+        <div class="page-heading hero-heading">
+          <div><p class="eyebrow">PROSPECTING WORKSPACE <span class="eyebrow-rule"></span> CYBERSECURITY</p>
+            <h1>Find your next <span>right conversation.</span></h1>
+            <p class="heading-note">Prioritize observed evidence. Verify the account before you reach out.</p></div>
+          <div class="hero-aside"><div class="signal-orbit" aria-hidden="true"><span class="orbit-core">S</span><span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span><span class="orbit-dot dot-three"></span></div>
+            <button id="export-selected" class="button secondary" disabled>↓ <span>Export shortlist</span></button></div>
+        </div>
+        <div id="source-caveat" class="source-caveat"><span class="caveat-icon">i</span>
+          <span><strong>Signal quality matters.</strong> This source records internet-facing service observations — not verified company ownership, vulnerabilities, headquarters, or buying intent. Infrastructure location is not a sales territory. All outreach needs human review.</span>
+        </div>
+        <div class="stat-grid" id="stat-grid" aria-label="Account overview"></div>
+        <section class="workspace-card" aria-labelledby="accounts-title">
+          <div class="table-heading">
+            <div><h2 id="accounts-title">Account candidates <span id="result-count" class="count-badge"></span></h2>
+              <p>Ranked by corroboration-worthy evidence and recency, not purchase intent.</p></div>
+            <label class="sort-control">Sort by
+              <select id="sort"><option value="score">Priority score</option><option value="freshness">Most recent</option><option value="name">Company name</option></select>
+            </label>
+          </div>
+          <div class="filters">
+            <label class="search-wrap"><span aria-hidden="true">⌕</span><span class="sr-only">Search accounts</span><input id="search" type="search" placeholder="Search domain or provider…" autocomplete="off"></label>
+            <label><span class="sr-only">Country observed</span><select id="country"><option value="">All observed countries</option></select></label>
+            <label><span class="sr-only">Service segment</span><select id="segment"><option value="">All service segments</option></select></label>
+            <label><span class="sr-only">Priority</span><select id="priority"><option value="">All priorities</option><option>Review now</option><option>Research</option><option>Monitor</option><option>Hold</option></select></label>
+            <label class="check-filter"><input id="include-hold" type="checkbox"> Include provider / ambiguous</label>
+          </div>
+          <div class="table-scroll"><table><thead><tr>
+            <th class="select-col"><input id="select-visible" type="checkbox" aria-label="Select all visible candidates"></th>
+            <th>Account</th><th>Observed location</th><th>Exposure signals</th><th>Last observed</th><th>Score</th><th>Priority</th>
+          </tr></thead><tbody id="account-rows"></tbody></table></div>
+          <div id="empty-state" class="empty-state" hidden>No account candidates match. Try a different filter.</div>
+          <footer class="table-footer"><span id="sample-note">Preparing source notes…</span><div class="pagination"><button id="previous-page" class="page-button" disabled aria-label="Previous results page">←</button><span id="page-indicator" aria-live="polite"></span><button id="next-page" class="page-button" aria-label="Next results page">→</button></div></footer>
+        </section>
+        <footer class="page-footer">Every signal is an invitation to investigate — <strong>not a security finding or reason to alarm.</strong>
+          <span>Source: <a id="source-link" href="#" target="_blank" rel="noreferrer">snapshot file</a></span>
+        </footer>
+      </section>
+      <section id="activity-view" hidden>
+        <div class="page-heading"><div><p class="eyebrow">RESEARCH OPERATIONS <span class="eyebrow-rule"></span> AUDIT TRAIL</p>
+          <h1>Activity &amp; <span>AI traces.</span></h1>
+          <p class="heading-note">Review account dispositions and inspect each recorded AI request.</p></div></div>
+        <section class="workspace-card activity-card">
+          <div class="table-heading"><div><h2>Researcher activity</h2><p>Recent account notes and workflow status.</p></div></div>
+          <div class="table-scroll"><table><thead><tr><th>Account</th><th>Status</th><th>Updated</th><th>Notes</th></tr></thead><tbody id="activity-rows"></tbody></table></div>
+          <p id="activity-empty" class="empty-state" hidden>No researcher activity recorded yet.</p>
+        </section>
+        <section class="workspace-card activity-card">
+          <div class="table-heading"><div><h2>AI decision log</h2><p>Request and response are retained locally. Live calls include provider usage and estimated cost.</p></div></div>
+          <div class="table-scroll"><table><thead><tr><th>Time</th><th>Mode / model</th><th>Prompt</th><th>Decision</th><th>Latency</th><th>Cost</th><th>Status</th></tr></thead><tbody id="trace-rows"></tbody></table></div>
+          <p id="trace-empty" class="empty-state" hidden>No AI briefings requested. Offline rules are not an LLM.</p>
+        </section>
+      </section>
+    </main>
+  </div>
+  <dialog id="detail-dialog" aria-labelledby="detail-title">
+    <div class="detail-head"><div><p class="eyebrow">ACCOUNT RESEARCH</p><h2 id="detail-title"></h2><p id="detail-domain" class="detail-domain"></p></div>
+      <button class="icon-button" id="close-dialog" aria-label="Close account details">×</button></div>
+    <div id="detail-content" class="detail-content"></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

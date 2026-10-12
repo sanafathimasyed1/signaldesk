@@ -1,0 +1,14 @@
+{
+  "source_url": "https://f001.backblazeb2.com/b2api/v1/b2_download_file_by_id?fileId=4_z53658c377a6f469082f90a15_f203f57b98e5fb869_d20261008_m141631_c001_v0001097_t0036_u01791468991916",
+  "source_name": "2026-10-08T13:00:00.json.zst",
+  "records_imported": 12000,
+  "records_scanned": 12000,
+  "invalid_records": 0,
+  "sample_strategy": "Bounded sequential prefix, NOT a random or representative market sample",
+  "imported_at": "2026-10-11T17:23:54.814239+00:00",
+  "compressed_bytes_read": 12189696,
+  "prefix_sha256": "e393a3af879af75f1c736db849effc47456d1033fb65624b29d893ccc8a240ff",
+  "normalization_version": "v1",
+  "total_compressed_source_bytes": 11882007675,
+  "privacy": "Only allowlisted metadata retained; no IPs, banners, certificate blobs, contacts or credentials"
+}

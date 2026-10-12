@@ -1,0 +1,9 @@
+.idea/
+.venv/
+__pycache__/
+*.pyc
+.env
+var/
+*.sqlite*
+data/*.tmp
+evals/results/live-*.json
