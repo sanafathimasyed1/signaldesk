@@ -19,4 +19,4 @@ Only 1,124 of 1,760 current distinct account/provider groups in this prefix are 
 
 ## Explicit non-goals
 
-No network probing, vulnerability verification, enrichment scraping, account-identity guessing, automatic email sending, CRM integration, funnel probability, customer-list upload, or automatic discovery of named decision-makers. Public hosting was initially deferred; the requester later chose Render with persistent storage. Deployment scaffolding is prepared, but an actual hosted URL and independent human evaluation remain pending.
+No network probing, vulnerability verification, enrichment scraping, account-identity guessing, automatic email sending, CRM integration, funnel probability, customer-list upload, or automatic discovery of named decision-makers. The selected host is now PythonAnywhere with WSGI and persistent account-home SQLite. Deployment scaffolding is prepared, but an actual hosted URL and independent human evaluation remain pending.

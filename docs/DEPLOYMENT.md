@@ -1,63 +1,89 @@
-# Hosting SignalDesk on Render
+# Hosting SignalDesk on PythonAnywhere
 
-## Current status
+## Prepared, not deployed
 
-The repository now includes a Render Blueprint, Docker packaging, an authenticated reviewer workspace, and a persistent SQLite disk configuration. **These are deployment preparation, not a deployed app or live URL.** Deployment requires the repository owner to connect GitHub, create a Render account and approve the paid service/disk. This is a small shared take-home demonstration, not enterprise multiuser production software.
+The application supports PythonAnywhere through a standard WSGI adapter that reuses the existing HTTP/API behavior without additional dependencies. The hosted runtime needs Python **3.10 or later** and the checked-in sanitized sample. Python 3.14 is required only for the optional compressed-source importer, which should not run during deployment.
 
-## Publish the code
+`pythonanywhere_wsgi.py` is a configuration template, not a running public app. Free-tier availability, CPU/storage quotas, web-app renewal and outbound internet restrictions depend on your current account. Confirm the available offer before signup. No paid disk or container is required. SQLite is kept in your home directory, survives ordinary web-app reloads and uses account storage quota.
 
-Run in your own PowerShell terminal and sign in to GitHub when asked:
+## 1. Publish the latest code
+
+In your Windows PowerShell terminal:
 
 ```powershell
 cd C:\Users\ssana\IdeaProjects\PythonProject1
+git add main.py wsgi.py pythonanywhere_wsgi.py tests .gitignore .env.example README.md docs
+git add -u
+git commit -m "Replace hosting configuration with PythonAnywhere WSGI support" -m "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
 git push -u origin main
 ```
 
-If you previously pushed `main`, the same command publishes the newest commit. Verify that GitHub shows `render.yaml`, `Dockerfile`, and `docs/DEPLOYMENT.md`. Do not upload `.env`, API keys, private database files or the virtual environment.
+Skip `git commit` if these changes are already committed. Sign in to GitHub when prompted. Confirm that your repository contains `wsgi.py`, `pythonanywhere_wsgi.py`, and these instructions. Never upload private config, passwords, keys, `.env`, SQLite files or virtual environments.
 
-## Create the hosted app
+## 2. Create an account and upload
 
-1. Open <https://dashboard.render.com/>. Create an account or sign in with GitHub.
-2. Choose **New → Blueprint** and connect `sanafathimasyed1/signaldesk`, branch `main`. Allow Render access to that repository only if possible.
-3. Render reads `render.yaml`. Review the **Starter web service** and **1 GB persistent disk** costs before approving. Pricing is Render's current dashboard pricing, not a figure guaranteed by this repository.
-4. Supply the prompted `SIGNALDESK_PASSWORD`: a randomly generated, unique password of at least 16 characters. Set it in Render, not source code or chat. Username is `reviewer`. Keep the password private and share it separately with the assessor.
-5. Create the resources. The Docker image uses Python 3.14, serves the checked-in source sample, listens on Render's `PORT`, and writes SQLite to `/var/data/signaldesk.sqlite`. There is no full-source download during deployment.
-6. Wait for the deployment to report **Live**. Copy the actual HTTPS service URL from Render; don't invent a URL or use localhost.
-7. Open it in a private browser window. Before login, `/` and `/api/accounts` must require authentication. `/healthz` is intentionally public and reveals only `{"status":"ok"}`. Sign in using the reviewer credentials; confirm account search, details, notes, draft creation and CSV export.
-8. Save a harmless note, manually restart the service in Render and confirm it remains. SQLite is on the persistent disk so notes, traces and daily spending are not reset by ordinary restarts.
+Create a PythonAnywhere account at <https://www.pythonanywhere.com/> (or its regional site). Note your **PythonAnywhere username**; it may differ from GitHub's. In **Consoles**, open a **Bash** console and run:
 
-Render terminates HTTPS in front of the container; browser Basic authentication must be used **only through that HTTPS URL**. The server refuses network binding without a sufficiently long configured password. This is a single shared reviewer identity, not personal accounts/roles. Anyone given those credentials can see/edit all workspace data; enter no confidential prospect/customer data. Basic-auth sign-out normally requires closing the private browser session.
+```bash
+git clone https://github.com/sanafathimasyed1/signaldesk.git
+cd ~/signaldesk
+```
 
-The persistent disk limits this SQLite demo to one service instance and can cause deployment downtime. Monitor usage and export backups using SQLite's backup facilities rather than copying an active WAL database. Backups, privacy retention policies, login rate limiting, a hardened application server, individual roles and organization isolation remain necessary for a true production service.
+These commands run on PythonAnywhere's Linux host, not your local PowerShell. If already cloned, use `git pull --ff-only`. A private GitHub repository requires authentication; never embed a personal token in the URL. Alternatively upload a GitHub source ZIP through PythonAnywhere's Files tab, extract it and ensure the project directory is named `signaldesk`.
 
-## Optional live AI
+Do not run `python main.py` or keep a console web server alive to publish the app. PythonAnywhere serves it through the Web tab's WSGI worker.
 
-The initial deployment deliberately has **no API key** and shows "Offline rules · no LLM." That is an honest working demo, not measured live AI. If you choose to enable the live feature:
+## 3. Create private reviewer configuration
 
-1. Create a provider account with billing and an appropriate project-scoped key.
-2. Add `OPENAI_API_KEY` as a secret environment variable in Render's service dashboard. Never add it to `render.yaml` or GitHub.
-3. Confirm `gpt-4.1-mini` availability, strict-schema compatibility and actual input/output prices. Update `AI_INPUT_USD_PER_MILLION` and `AI_OUTPUT_USD_PER_MILLION`; the defaults are planning assumptions.
-4. Keep `AI_DAILY_BUDGET_USD=0.50` or a smaller chosen limit. Enable provider-side spending controls too.
-5. Restart, confirm the UI says live mode, request one briefing and inspect trace usage/cost. Do not distribute reviewer credentials beyond the intended assessors.
+In that Bash console, use an available Python 3 executable (e.g. `python3.13`) to generate a private password configuration:
 
-## Finish the evaluation requirement
+```bash
+python3 -c 'import json,secrets,pathlib; p=pathlib.Path.home()/".signaldesk-config.json"; assert not p.exists(), "Config already exists; do not overwrite credentials"; p.write_text(json.dumps({"password":secrets.token_urlsafe(24)})); p.chmod(0o600); print("Private reviewer configuration created")'
+```
 
-The existing synthetic set remains a rule regression suite, **not the requested human-labelled LLM evaluation**. A frozen real-data review packet has been generated:
+This file is **outside the repository**, restricted to your account, and never committed. To retrieve the generated password privately, view the file through your own Files tab; don't paste it in chat, screenshots or source. Reviewer username is `reviewer`. Share credentials with the assessor separately from the app URL.
 
-- Read `evals/human-review/blind-packet.json` (actual source evidence; no score/model prediction).
-- Fill `evals/human-review/labels.csv` yourself. Each row needs `label` (`review`, `research`, `monitor`, or `insufficient`), `confidence` (`low`, `medium`, `high`), `reason`, `reviewer`, and an ISO date/time in `reviewed_at`.
-- Use the guidance in `evals/HUMAN_REVIEW.md`. A second blind reviewer is useful; record disagreements instead of adjusting labels to match predictions.
-- Then run:
+## 4. Configure Web / WSGI
+
+1. Open **Web → Add a new web app**.
+2. Choose **Manual configuration** and an available Python **3.10+** version. No Flask installation, virtualenv or pip requirements are needed because this app is standard-library WSGI.
+3. Set source code and working directory, if shown, to `/home/YOUR_USERNAME/signaldesk`.
+4. Open the **WSGI configuration file** linked in the Web tab.
+5. Replace its example contents with the contents of the repository's `pythonanywhere_wsgi.py`.
+6. Change `ACCOUNT_USERNAME = "YOUR_PYTHONANYWHERE_USERNAME"` to your actual PythonAnywhere account name.
+7. Save and click **Reload**.
+
+Do **not** configure PythonAnywhere static-file mappings for `/`, `/app.js` or `/styles.css`: the application serves and password-protects these routes. The template loads the private JSON password, initializes the database at `/home/YOUR_USERNAME/.signaldesk/signaldesk.sqlite`, loads the checked-in sample and exports the WSGI `application` callable.
+
+Use the HTTPS site address shown in the Web tab; its hostname depends on the account/region. Don't invent a URL or share localhost. Enable/force HTTPS using the platform settings where available; reviewer Basic authentication must never be used over plain HTTP.
+
+## 5. Confirm the hosted demo
+
+Open the site in a private browser window. Root and API routes should ask for the reviewer login. `/healthz` is intentionally public and returns only `{"status":"ok"}`. After login, confirm search, filters, evidence details, shortlist export, saved notes, and offline briefings work. Save a harmless note, reload the web app, and confirm it remains.
+
+If you see an error, use the Web tab's error/server logs:
+
+- Missing password config: create it at your account home path, not inside the project.
+- Import error for `main` or `wsgi`: confirm username, project path and that latest code is uploaded.
+- Unsupported Python syntax: select Python 3.10+ in the Web tab.
+- Source file missing: make sure `data/observations.jsonl` and `data/provenance.json` were uploaded.
+- SQLite error: confirm your home directory is writable and account disk quota is not exhausted.
+
+Each credential holder can see/edit the same workspace. This is shared assessor access, not per-person authorization. Closing the private browser session ends normal browser credential caching. Protect backups, avoid confidential prospect notes, and remove/revoke assessor credentials when the demonstration ends. Free sites may require renewal; follow the account dashboard notices.
+
+## 6. Live AI and remaining evaluation
+
+The template deliberately removes `OPENAI_API_KEY` from the web worker environment: this free-hosted demo runs **offline rules, not a live model**. PythonAnywhere free accounts restrict outbound access, and successful calls to a model provider are not assumed. If you later upgrade/use approved connectivity, explicitly configure secrets outside Git, confirm provider access/pricing, keep a durable daily spending limit and record real call results before presenting it as live AI.
+
+Independent human-labelled evaluation remains pending. Read `evals/human-review/blind-packet.json`, fill `labels.csv` yourself using `evals/HUMAN_REVIEW.md`, then run locally:
 
 ```powershell
 python evals\human_review.py import
 python evals\run.py --dataset evals\human-review\human-labeled.jsonl --mode offline
-# Set your API key privately in the shell, then measure the actual model:
+# With your provider API key privately configured on your own computer:
 python evals\run.py --dataset evals\human-review\human-labeled.jsonl --mode live --output evals\results\human-live.json
 ```
 
-The harness checks labels and compares results only against the same data hash and mode. Errors count as failed predictions, not successful safe fallbacks. It reports per-class precision/recall/F1, acceptance, token-derived cost including failed-call reservations, mean latency and prompt hashes. The retained v1 baseline can have live outputs rejected by current safety validation; those failures remain visible in results. Freeze a baseline before changing the prompt; don't tune repeatedly against your entire held-out set.
+A free hosted offline demo and a separately measured local LLM workflow must be described as such; do not imply the public app uses the model if it does not. Hosting preparation is not deployment, and a blank review packet is not human-labelled ground truth.
 
-**Do not claim all requirements complete until** the real hosted URL works, you have independently labelled 20–30 evaluable cases, you have measured the live core feature (if enabled), and your submission documents those results and limitations. Hosting alone does not supply the missing human judgments.
-
-References: [Render Blueprints](https://render.com/docs/infrastructure-as-code), [Blueprint specification](https://render.com/docs/blueprint-spec), [persistent disks](https://render.com/docs/disks).
+References: [PythonAnywhere WSGI setup](https://help.pythonanywhere.com/pages/WSGI/), [Python versions](https://help.pythonanywhere.com/pages/PythonVersions/), [free-account outbound restrictions](https://help.pythonanywhere.com/pages/403ForbiddenError/).

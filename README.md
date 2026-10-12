@@ -4,12 +4,13 @@ A local-first, explainable cybersecurity account-research workbench. It reads a 
 
 ## Start locally
 
-Python **3.14+** is required for its standard-library `compression.zstd` support; no packages are needed.
+Python **3.10+** can run the app with the checked-in sample; no packages are needed. Only re-importing the compressed source requires **Python 3.14+** for standard-library `compression.zstd`.
 
 ```powershell
-python scripts\import_dataset.py --records 12000 --max-mb 32
 python main.py
 ```
+
+Optional re-import on Python 3.14+: `python scripts\import_dataset.py --records 12000 --max-mb 32`.
 
 Open <http://127.0.0.1:8000>. A sanitized, 12,000-observation snapshot and provenance are already checked in under `data/`. Importer downloads at most the selected compressed-byte cap, reads a sequential—not representative—prefix, and discards IPs, banners and certificate bodies. The request links back to the full Backblaze object and full metadata lives in `data/provenance.json`.
 
@@ -30,6 +31,6 @@ Offline evaluation runs both prompt/policy versions on 24 synthetic cases and co
 
 ## Hosting and remaining deliverables
 
-Render hosting is now prepared with `render.yaml`, `Dockerfile`, a paid persistent SQLite disk, reviewer password protection, and a public non-sensitive healthcheck. Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to connect GitHub, approve hosting costs and set a secret password. **No hosted URL is claimed until you actually deploy.** Network binding requires a 16+ character `SIGNALDESK_PASSWORD`; use only behind an HTTPS hosting proxy. This is one shared reviewer workspace, not an enterprise multiuser service.
+PythonAnywhere hosting is prepared with a dependency-free WSGI adapter (`wsgi.py`), a Web-tab configuration template (`pythonanywhere_wsgi.py`), reviewer password protection, persistent SQLite under your account's home directory, and a public non-sensitive healthcheck. Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md). **No hosted URL is claimed until you actually deploy.** Hosting requires a 16+ character `SIGNALDESK_PASSWORD` and HTTPS. The free-hosting template deliberately disables live AI; outbound provider access is restricted on free accounts. This is one shared reviewer workspace, not an enterprise multiuser service.
 
 A blind 24-case real-data packet and blank review sheet are in `evals/human-review/`; see [`evals/HUMAN_REVIEW.md`](evals/HUMAN_REVIEW.md). Human labels and live-model measurements are still pending. Import your completed labels using `python evals\human_review.py import`, then run the harness with `--dataset evals\human-review\human-labeled.jsonl --mode live`. Hosting and preparation do not complete those requirements by themselves. `docs/HOW_WE_BUILD.md` explains the development loop and limitations.
