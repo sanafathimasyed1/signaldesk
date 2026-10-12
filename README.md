@@ -28,6 +28,8 @@ python evals\run.py --mode offline
 
 Offline evaluation runs both prompt/policy versions on 24 synthetic cases and compares v2 against the preceding run. The measured run: v1 **45.8% accuracy / 0.360 macro-F1**; v2 **100% / 1.000** on these cases. That perfect score reflects labels encoding the same v2 policy; they are AI-authored, not independent human judgments or real customer data. It tests deterministic rules, **not a live language model**. See `skills/evidence-triage/SKILL.md` for inputs, output schema, triggers, limits and examples. Detailed traces are in local SQLite. No host, live LLM benchmark, independent human-labeled customers, or Loom link are represented as completed.
 
-## Deployment and maturity
+## Hosting and remaining deliverables
 
-The requester elected to defer a hosted app, so this repository intentionally offers **no public URL or deployment configuration**. This prototype's local notes/traces require authentication, data-retention/privacy review, a persistent database and stronger production controls before internet exposure. `docs/HOW_WE_BUILD.md` explains the development loop and limitations.
+Render hosting is now prepared with `render.yaml`, `Dockerfile`, a paid persistent SQLite disk, reviewer password protection, and a public non-sensitive healthcheck. Follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to connect GitHub, approve hosting costs and set a secret password. **No hosted URL is claimed until you actually deploy.** Network binding requires a 16+ character `SIGNALDESK_PASSWORD`; use only behind an HTTPS hosting proxy. This is one shared reviewer workspace, not an enterprise multiuser service.
+
+A blind 24-case real-data packet and blank review sheet are in `evals/human-review/`; see [`evals/HUMAN_REVIEW.md`](evals/HUMAN_REVIEW.md). Human labels and live-model measurements are still pending. Import your completed labels using `python evals\human_review.py import`, then run the harness with `--dataset evals\human-review\human-labeled.jsonl --mode live`. Hosting and preparation do not complete those requirements by themselves. `docs/HOW_WE_BUILD.md` explains the development loop and limitations.

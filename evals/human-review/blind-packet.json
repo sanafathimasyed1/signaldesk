@@ -1,0 +1,820 @@
+[
+  {
+    "id": "H01",
+    "candidate": "wonder-ma.com",
+    "provider": "Amazon.com, Inc.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "bb29cf9c503d4e2910ff",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:57.304254+00:00",
+        "country": "US",
+        "product": "CloudFront httpd",
+        "flags": [],
+        "candidate_domains": [
+          "wonder-ma.com"
+        ],
+        "provider": "Amazon.com, Inc."
+      }
+    ]
+  },
+  {
+    "id": "H02",
+    "candidate": "ecommunity.com",
+    "provider": "Community Hospital of Indianapolis",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "c6af677567eea5777232",
+        "port": 5222,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:01.228803+00:00",
+        "country": "US",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [
+          "ecommunity.com"
+        ],
+        "provider": "Community Hospital of Indianapolis"
+      }
+    ]
+  },
+  {
+    "id": "H03",
+    "candidate": "Nuevos Hoteles de Panama, S.A.",
+    "provider": "Nuevos Hoteles de Panama, S.A.",
+    "attribution": "Provider-only or multi-domain observation; cannot identify a customer. Hold until ownership is enriched.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "f56f20a80e6ee4ff5f55",
+        "port": 161,
+        "transport": "udp",
+        "observed_at": "2026-10-08T12:59:59.498380+00:00",
+        "country": "PA",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Nuevos Hoteles de Panama, S.A."
+      }
+    ]
+  },
+  {
+    "id": "H04",
+    "candidate": "Hetzner Online GmbH",
+    "provider": "Hetzner Online GmbH",
+    "attribution": "Provider-only or multi-domain observation; cannot identify a customer. Hold until ownership is enriched.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "620a7dda7bb3a74f012a",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:58.164644+00:00",
+        "country": "FI",
+        "product": "Ncat http proxy",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "66606892b812efc0e6cb",
+        "port": 8000,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:57.270215+00:00",
+        "country": "US",
+        "product": "nginx",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "ecd6e4b3e46d9598c578",
+        "port": 22,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:59.999829+00:00",
+        "country": "DE",
+        "product": "OpenSSH",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "602b2cc6f3719fab5714",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:59.249233+00:00",
+        "country": "DE",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "ee4777c11bb206e28eba",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:44.391689+00:00",
+        "country": "DE",
+        "product": "nginx",
+        "flags": [
+          "reported-cve"
+        ],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "91fc29b7730c1cf6610d",
+        "port": 2222,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:45.871705+00:00",
+        "country": "DE",
+        "product": "OpenSSH",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "033af49b1ddcbf6a63ef",
+        "port": 3000,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:57.848042+00:00",
+        "country": "DE",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "157ddc246ae5b9b5508f",
+        "port": 22,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:00.639410+00:00",
+        "country": "GB",
+        "product": "OpenSSH",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "0f1c25209cf829e3b52a",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:59.930918+00:00",
+        "country": "DE",
+        "product": "Ncat http proxy",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "b7c9e8d4330b6a990b6b",
+        "port": 12200,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:01.199913+00:00",
+        "country": "DE",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "456d8ecf9cff5442fbf7",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:59.311566+00:00",
+        "country": "FI",
+        "product": "Ncat http proxy",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "b7990912f0a97310526e",
+        "port": 80,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:59.230212+00:00",
+        "country": "DE",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "c104553e01515757050a",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:01.938618+00:00",
+        "country": "US",
+        "product": "Ncat http proxy",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "deb90c48670c440cc913",
+        "port": 80,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:01.546396+00:00",
+        "country": "FI",
+        "product": "nginx",
+        "flags": [
+          "reported-cve"
+        ],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "09699350382eb22406b3",
+        "port": 22,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:02.100046+00:00",
+        "country": "AE",
+        "product": "OpenSSH",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "3013fd807f425cdb0d07",
+        "port": 80,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:57.262591+00:00",
+        "country": "DE",
+        "product": "nginx",
+        "flags": [],
+        "candidate_domains": [
+          "prinsenhof-groningen.nl",
+          "prinsenhof.nl"
+        ],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "853832a6941027606c82",
+        "port": 110,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:02.266358+00:00",
+        "country": "DE",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "e6f6f75490585059022f",
+        "port": 80,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:01.115349+00:00",
+        "country": "DE",
+        "product": "nginx",
+        "flags": [
+          "reported-cve"
+        ],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "40c8eda03293f2027253",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:42.827938+00:00",
+        "country": "DE",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "6607b8aedee05cca9cea",
+        "port": 3001,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:02.199604+00:00",
+        "country": "AE",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "eb56875c0bb82f427740",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:35.328014+00:00",
+        "country": "DE",
+        "product": "nginx",
+        "flags": [
+          "reported-cve"
+        ],
+        "candidate_domains": [
+          "dns-name.net",
+          "verkehrsrecht-moerfelden-walldorf.de"
+        ],
+        "provider": "Hetzner Online GmbH"
+      },
+      {
+        "id": "c9dc451bc7bf6b681f2a",
+        "port": 8123,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:01.808846+00:00",
+        "country": "DE",
+        "product": "Jetty",
+        "flags": [
+          "reported-cve"
+        ],
+        "candidate_domains": [],
+        "provider": "Hetzner Online GmbH"
+      }
+    ]
+  },
+  {
+    "id": "H05",
+    "candidate": "Telecom Italia S.p.A.",
+    "provider": "Telecom Italia S.p.A.",
+    "attribution": "Provider-only or multi-domain observation; cannot identify a customer. Hold until ownership is enriched.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "1a8f705be17645ddf46e",
+        "port": 7170,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:57.931382+00:00",
+        "country": "IT",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [
+          "interbusiness.it",
+          "telecomitalia.it"
+        ],
+        "provider": "Telecom Italia S.p.A."
+      },
+      {
+        "id": "c36b208cc002d3e96b85",
+        "port": 7170,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:59.283607+00:00",
+        "country": "IT",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [
+          "interbusiness.it",
+          "telecomitalia.it"
+        ],
+        "provider": "Telecom Italia S.p.A."
+      }
+    ]
+  },
+  {
+    "id": "H06",
+    "candidate": "whmzwy.com",
+    "provider": "Cloudflare, Inc.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "6d9dbd498b526da8c869",
+        "port": 80,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:57.441356+00:00",
+        "country": "US",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [
+          "whmzwy.com"
+        ],
+        "provider": "Cloudflare, Inc."
+      }
+    ]
+  },
+  {
+    "id": "H07",
+    "candidate": "bestsrv.de",
+    "provider": "netcup GmbH",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "f8c0fe325f1bb857c03e",
+        "port": 3389,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:01.048751+00:00",
+        "country": "AT",
+        "product": "Remote Desktop Protocol",
+        "flags": [
+          "remote-access"
+        ],
+        "candidate_domains": [
+          "bestsrv.de"
+        ],
+        "provider": "netcup GmbH"
+      }
+    ]
+  },
+  {
+    "id": "H08",
+    "candidate": "zbif3899.net",
+    "provider": "Cloudflare, Inc.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "2aedea74143d36d52dc1",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:52.534479+00:00",
+        "country": "US",
+        "product": "CloudFlare",
+        "flags": [
+          "legacy-tls"
+        ],
+        "candidate_domains": [
+          "zbif3899.net"
+        ],
+        "provider": "Cloudflare, Inc."
+      }
+    ]
+  },
+  {
+    "id": "H09",
+    "candidate": "China Unicom IP network",
+    "provider": "China Unicom IP network",
+    "attribution": "Provider-only or multi-domain observation; cannot identify a customer. Hold until ownership is enriched.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "413bca10effbe7cbb685",
+        "port": 7547,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:55.466766+00:00",
+        "country": "CN",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "China Unicom IP network"
+      }
+    ]
+  },
+  {
+    "id": "H10",
+    "candidate": "longisland.com",
+    "provider": "Cloudflare, Inc.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "aba2fe9ce8a46c58425a",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:49.763846+00:00",
+        "country": "US",
+        "product": "",
+        "flags": [
+          "reported-cve"
+        ],
+        "candidate_domains": [
+          "longisland.com"
+        ],
+        "provider": "Cloudflare, Inc."
+      }
+    ]
+  },
+  {
+    "id": "H11",
+    "candidate": "vrachblog.ru",
+    "provider": "Cloudflare, Inc.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "2b9be841243935db86bc",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:52.646905+00:00",
+        "country": "US",
+        "product": "",
+        "flags": [
+          "legacy-tls"
+        ],
+        "candidate_domains": [
+          "vrachblog.ru"
+        ],
+        "provider": "Cloudflare, Inc."
+      }
+    ]
+  },
+  {
+    "id": "H12",
+    "candidate": "clsmf.org",
+    "provider": "Cloudflare, Inc.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "dc4cf30432704d765717",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:51.843107+00:00",
+        "country": "US",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [
+          "clsmf.org"
+        ],
+        "provider": "Cloudflare, Inc."
+      }
+    ]
+  },
+  {
+    "id": "H13",
+    "candidate": "a3bc.nl",
+    "provider": "WholesaleConnections Wholesale Connections B.V.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "45b95aafe3719e9d352a",
+        "port": 5432,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:58.945012+00:00",
+        "country": "NL",
+        "product": "PostgreSQL",
+        "flags": [
+          "data-service"
+        ],
+        "candidate_domains": [
+          "a3bc.nl"
+        ],
+        "provider": "WholesaleConnections Wholesale Connections B.V."
+      }
+    ]
+  },
+  {
+    "id": "H14",
+    "candidate": "Gulfstream Aerospace Corporation",
+    "provider": "Gulfstream Aerospace Corporation",
+    "attribution": "Provider-only or multi-domain observation; cannot identify a customer. Hold until ownership is enriched.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "f738000a4af929cc9117",
+        "port": 5222,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:01.017985+00:00",
+        "country": "US",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Gulfstream Aerospace Corporation"
+      }
+    ]
+  },
+  {
+    "id": "H15",
+    "candidate": "1e100.net",
+    "provider": "Google LLC",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "4d25c5bbf58e897ae7f8",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:44.513673+00:00",
+        "country": "NL",
+        "product": "",
+        "flags": [
+          "legacy-tls"
+        ],
+        "candidate_domains": [
+          "1e100.net"
+        ],
+        "provider": "Google LLC"
+      },
+      {
+        "id": "2d74a70adf29440be05d",
+        "port": 55442,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T13:00:01.172667+00:00",
+        "country": "US",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [
+          "1e100.net"
+        ],
+        "provider": "Google LLC"
+      }
+    ]
+  },
+  {
+    "id": "H16",
+    "candidate": "khanhhoa.org",
+    "provider": "Cloudflare, Inc.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "69d594c8ee022c1ce8ed",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:49.803554+00:00",
+        "country": "US",
+        "product": "",
+        "flags": [
+          "legacy-tls"
+        ],
+        "candidate_domains": [
+          "khanhhoa.org"
+        ],
+        "provider": "Cloudflare, Inc."
+      }
+    ]
+  },
+  {
+    "id": "H17",
+    "candidate": "Zhejiang Taobao Network Co.,Ltd",
+    "provider": "Zhejiang Taobao Network Co.,Ltd",
+    "attribution": "Provider-only or multi-domain observation; cannot identify a customer. Hold until ownership is enriched.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "36198cedea04d121775f",
+        "port": 11,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:58.888143+00:00",
+        "country": "CN",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [],
+        "provider": "Zhejiang Taobao Network Co.,Ltd"
+      }
+    ]
+  },
+  {
+    "id": "H18",
+    "candidate": "noord-holland.nl",
+    "provider": "Amazon Technologies Inc.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "be8d73c699e605ace6bb",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:27.757043+00:00",
+        "country": "IE",
+        "product": "nginx",
+        "flags": [],
+        "candidate_domains": [
+          "noord-holland.nl"
+        ],
+        "provider": "Amazon Technologies Inc."
+      }
+    ]
+  },
+  {
+    "id": "H19",
+    "candidate": "baycollege.edu",
+    "provider": "Cloudflare, Inc.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "214e60ff1c1d4f1293a0",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:54.344658+00:00",
+        "country": "US",
+        "product": "Microsoft IIS httpd",
+        "flags": [
+          "legacy-tls"
+        ],
+        "candidate_domains": [
+          "baycollege.edu"
+        ],
+        "provider": "Cloudflare, Inc."
+      }
+    ]
+  },
+  {
+    "id": "H20",
+    "candidate": "sam-xlation.de",
+    "provider": "SAM Xlation GmbH",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "70730539bf44d7a69583",
+        "port": 5222,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:58.177106+00:00",
+        "country": "DE",
+        "product": "",
+        "flags": [
+          "expired-cert"
+        ],
+        "candidate_domains": [
+          "sam-xlation.de"
+        ],
+        "provider": "SAM Xlation GmbH"
+      }
+    ]
+  },
+  {
+    "id": "H21",
+    "candidate": "ptscbd-staging.id",
+    "provider": "PT Digital Registra Indonesia",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "8007ba807bded0306a7b",
+        "port": 5432,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:46.012413+00:00",
+        "country": "ID",
+        "product": "PostgreSQL",
+        "flags": [
+          "data-service"
+        ],
+        "candidate_domains": [
+          "ptscbd-staging.id"
+        ],
+        "provider": "PT Digital Registra Indonesia"
+      }
+    ]
+  },
+  {
+    "id": "H22",
+    "candidate": "vhg.com.tw",
+    "provider": "Cloudflare, Inc.",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "d17c0a00d7c87ec70cff",
+        "port": 443,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:51.879827+00:00",
+        "country": "US",
+        "product": "",
+        "flags": [
+          "legacy-tls",
+          "reported-cve"
+        ],
+        "candidate_domains": [
+          "vhg.com.tw"
+        ],
+        "provider": "Cloudflare, Inc."
+      }
+    ]
+  },
+  {
+    "id": "H23",
+    "candidate": "novus.ca",
+    "provider": "Cogent Communications, LLC",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "edb5caddf187314b7351",
+        "port": 7547,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:55.465278+00:00",
+        "country": "CA",
+        "product": "",
+        "flags": [],
+        "candidate_domains": [
+          "novus.ca"
+        ],
+        "provider": "Cogent Communications, LLC"
+      }
+    ]
+  },
+  {
+    "id": "H24",
+    "candidate": "iptox.net",
+    "provider": "iptoX GmbH",
+    "attribution": "Single non-provider domain candidate; ownership unverified. Confirm the account and service owner before outreach.",
+    "prepared_at": "2026-10-12T16:28:32.089302+00:00",
+    "evidence": [
+      {
+        "id": "80b1526016d0fbe5cb4e",
+        "port": 3306,
+        "transport": "tcp",
+        "observed_at": "2026-10-08T12:59:58.316589+00:00",
+        "country": "DE",
+        "product": "MySQL",
+        "flags": [
+          "data-service"
+        ],
+        "candidate_domains": [
+          "iptox.net"
+        ],
+        "provider": "iptoX GmbH"
+      }
+    ]
+  }
+]

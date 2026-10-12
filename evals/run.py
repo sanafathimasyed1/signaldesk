@@ -1,6 +1,7 @@
 """Run exact same deterministic/LLM triage and tracing path against small eval JSONL."""
 
 import argparse
+import hashlib
 import json
 import os
 import sys
@@ -10,11 +11,25 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from salesintel.ai import run_triage
-from salesintel.storage import initialize
+from salesintel.storage import connect, initialize
 
 CORPUS = Path(__file__).resolve().parent / "labeled-v1.jsonl"
 RESULTS = Path(__file__).resolve().parent / "results"
 CLASSES = ("review", "research", "monitor")
+
+
+def load_cases(path):
+    cases = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    if not cases:
+        raise ValueError("Evaluation set is empty")
+    ids = set()
+    for case in cases:
+        if case.get("expected") not in CLASSES or not case.get("why"):
+            raise ValueError("Every evaluation case needs a valid expected label and review rationale")
+        if case.get("id") in ids or not case.get("id"):
+            raise ValueError("Evaluation IDs must be present and unique")
+        ids.add(case["id"])
+    return cases
 
 
 def metrics(rows):
@@ -36,23 +51,29 @@ def metrics(rows):
 
 
 def run(version, mode, cases):
+    with connect() as db:
+        first_row = db.execute("SELECT COALESCE(MAX(rowid),0) FROM traces").fetchone()[0]
     output = []
     failures = 0
     for case in cases:
         try:
-            result = run_triage({key: value for key, value in case.items()
-                                 if key not in {"id", "expected", "why"}},
+            result = run_triage({key: case[key] for key in
+                                ("eligible", "age_days", "ownership_verified", "signals")},
                                version, mode=mode, account_id="eval:" + case["id"])
             output.append({**case, "decision": result["decision"], "accepted": True,
                            "evidence_ids": result["evidence_ids"], "trace_id": result["trace_id"],
                            "cost_usd": result["cost_usd"]})
             failures += result["decision"] != case["expected"]
-        except Exception as error:
+        except (RuntimeError, ValueError, TimeoutError) as error:
             # Errors are not correct predictions, safe defaults, or hidden fallbacks.
             output.append({**case, "decision": None, "accepted": False,
                            "error": f"{type(error).__name__}: {error}"})
             failures += 1
     scores = metrics(output)
+    with connect() as db:
+        usage = db.execute("SELECT COALESCE(SUM(cost_usd),0), AVG(latency_ms) FROM traces "
+                           "WHERE rowid>? AND prompt_version=? AND mode=?",
+                           (first_row, version, mode)).fetchone()
     return {"prompt_version": version, "mode": mode, "failures_including_errors": failures,
             "metrics": scores, "results": output,
             "unsupported_evidence_ids": sum(
@@ -60,34 +81,47 @@ def run(version, mode, cases):
                     {key for signal in row.get("signals", []) for key in signal["evidence_ids"]})
                 for row in output),
             "acceptance_rate": round(sum(row.get("accepted", False) for row in output) / len(output), 4),
-            "cost_usd": round(sum(row.get("cost_usd", 0) for row in output), 8)}
+            "cost_usd": round(usage[0], 8), "mean_latency_ms": round(usage[1], 2) if usage[1] is not None else None}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=("offline", "live"), default="offline")
     parser.add_argument("--db", default=str(ROOT / "var" / "evals.sqlite"))
-    parser.add_argument("--output", default=str(RESULTS / "latest.json"))
+    parser.add_argument("--dataset", type=Path, default=CORPUS)
+    parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     if args.mode == "live" and not os.getenv("OPENAI_API_KEY"):
         parser.error("--mode live requires OPENAI_API_KEY; offline is not a simulated LLM result")
     os.environ["SIGNALDESK_DB"] = args.db
     initialize()
-    cases = [json.loads(line) for line in CORPUS.read_text(encoding="utf-8").splitlines() if line.strip()]
+    try:
+        cases = load_cases(args.dataset)
+    except (ValueError, OSError) as error:
+        parser.error(str(error))
+    corpus_hash = hashlib.sha256(args.dataset.read_bytes()).hexdigest()
     results = {version: run(version, args.mode, cases) for version in ("v1", "v2")}
-    previous_path = Path(args.output)
+    previous_path = args.output or RESULTS / (
+        "latest.json" if args.mode == "offline" and args.dataset == CORPUS
+        else f"{args.mode}-{args.dataset.stem}-latest.json")
     previous = None
     if previous_path.exists():
         try:
             previous = json.loads(previous_path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError):
             print("Previous evaluation is unreadable; replacing with current measured run.", file=sys.stderr)
-    prior_v2 = previous.get("prompts", {}).get("v2", {}).get("metrics") if previous else None
+    comparable = previous and previous.get("mode") == args.mode and previous.get("corpus_sha256") == corpus_hash
+    prior_v2 = previous.get("prompts", {}).get("v2", {}).get("metrics") if comparable else None
+    for version, result in results.items():
+        result["prompt_sha256"] = hashlib.sha256(
+            (ROOT / "prompts" / "evidence-triage" / f"{version}.txt").read_bytes()).hexdigest()
     current = {
         "evaluated_at": datetime.now(timezone.utc).isoformat(), "mode": args.mode,
-        "corpus": "labeled-v1.jsonl",
-        "corpus_caveat": "Illustrative rule-policy cases, authored/reviewed by AI coding agent; "
-                         "not independent human labels, real customers, production traffic, or measured LLM outputs.",
+        "corpus": args.dataset.name, "corpus_sha256": corpus_hash,
+        "corpus_caveat": ("Illustrative rule-policy cases, authored/reviewed by AI coding agent; "
+                          "not independent human labels or field performance." if args.dataset == CORPUS else
+                          "User-supplied labels; reviewer provenance is recorded per case. "
+                          "Small stratified sample, not representative production traffic."),
         "prompts": results,
         "v2_delta_from_previous": ({
             "previous_evaluated_at": previous.get("evaluated_at"),

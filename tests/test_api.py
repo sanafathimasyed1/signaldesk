@@ -1,4 +1,5 @@
 import http.client
+import base64
 import json
 import os
 import tempfile
@@ -20,6 +21,7 @@ class APITests(unittest.TestCase):
         self.directory = tempfile.TemporaryDirectory()
         self.environment = patch.dict(os.environ, {
             "SIGNALDESK_DB": str(Path(self.directory.name) / "api.sqlite"), "OPENAI_API_KEY": "",
+            "SIGNALDESK_PASSWORD": "", "SIGNALDESK_USERNAME": "reviewer",
         })
         self.environment.start()
         initialize()
@@ -100,6 +102,34 @@ class APITests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertIn("' =HYPERLINK", body)
         self.assertIn("example.org", body)
+
+    def test_hosted_pages_and_data_require_credentials(self):
+        with patch.dict(os.environ, {"SIGNALDESK_PASSWORD": "a-long-test-password"}):
+            for path in ("/", "/app.js", "/styles.css", "/api/accounts", "/api/activity"):
+                status, _ = self.request("GET", path)
+                self.assertEqual(status, 401)
+            status, _ = self.request("POST", f"/api/accounts/{self.account_id}/state",
+                                     {"status": "New"})
+            self.assertEqual(status, 401)
+
+    def test_valid_reviewer_credentials_allow_access(self):
+        credential = base64.b64encode(b"reviewer:a-long-test-password").decode()
+        with patch.dict(os.environ, {"SIGNALDESK_PASSWORD": "a-long-test-password"}):
+            status, _ = self.request("GET", "/api/accounts",
+                                     headers={"Authorization": "Basic " + credential})
+            self.assertEqual(status, 200)
+
+    def test_invalid_credentials_and_malformed_headers_rejected(self):
+        with patch.dict(os.environ, {"SIGNALDESK_PASSWORD": "a-long-test-password"}):
+            for header in ("Basic ???", "Bearer token", "Basic bm90dGhlcGFzc3dvcmQ=", ""):
+                status, _ = self.request("GET", "/api/accounts", headers={"Authorization": header})
+                self.assertEqual(status, 401)
+
+    def test_healthcheck_contains_no_account_data_and_needs_no_password(self):
+        with patch.dict(os.environ, {"SIGNALDESK_PASSWORD": "a-long-test-password"}):
+            status, data = self.request("GET", "/healthz")
+            self.assertEqual(status, 200)
+            self.assertEqual(json.loads(data), {"status": "ok"})
 
 
 if __name__ == "__main__":

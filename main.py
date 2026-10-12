@@ -1,7 +1,10 @@
 """SignalDesk: a dependency-free sales workbench for passive service observations."""
 
 import argparse
+import base64
+import binascii
 import csv
+import hmac
 import io
 import json
 import os
@@ -50,7 +53,36 @@ class Handler(BaseHTTPRequestHandler):
         if path.startswith("/api/accounts/"):
             parts = path.split("/")
             path = "/api/accounts/{id}/" + (parts[-1] if len(parts) == 5 else "{operation}")
-        print(f"{self.command} {path} {fmt % args}")
+        print(f"{self.command} {path}")
+
+    def authorized(self):
+        password = os.getenv("SIGNALDESK_PASSWORD", "")
+        if not password:
+            return True
+        header = self.headers.get("Authorization", "")
+        try:
+            scheme, encoded = header.split(" ", 1)
+            if scheme.lower() != "basic":
+                raise ValueError("Unsupported authentication scheme")
+            supplied = base64.b64decode(encoded, validate=True).decode("utf-8")
+            username, separator, candidate = supplied.partition(":")
+            authenticated = bool(separator) and hmac.compare_digest(
+                username.encode(), os.getenv("SIGNALDESK_USERNAME", "reviewer").encode()
+            ) and hmac.compare_digest(candidate.encode(), password.encode())
+        except (ValueError, UnicodeDecodeError, binascii.Error):
+            authenticated = False
+        if authenticated:
+            return True
+        payload = b"Authentication required. Use the reviewer credentials provided by the owner."
+        self.send_response(401)
+        self.send_header("WWW-Authenticate", 'Basic realm="SignalDesk review", charset="UTF-8"')
+        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.send_header("Content-Length", str(len(payload)))
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.end_headers()
+        self.wfile.write(payload)
+        return False
 
     def respond(self, status, payload, content_type="application/json"):
         if content_type == "application/json":
@@ -78,8 +110,13 @@ class Handler(BaseHTTPRequestHandler):
                 for key, account in self.accounts.items()]
 
     def do_GET(self):
-        self.refresh_accounts()
         path = urlparse(self.path).path
+        if path == "/healthz":
+            self.respond(200, {"status": "ok"})
+            return
+        if not self.authorized():
+            return
+        self.refresh_accounts()
         if path == "/api/accounts":
             with connect() as db:
                 spend = db.execute(
@@ -118,6 +155,8 @@ class Handler(BaseHTTPRequestHandler):
             self.respond(200, (ROOT / "static" / filename).read_bytes(), content_type)
 
     def do_POST(self):
+        if not self.authorized():
+            return
         self.refresh_accounts()
         origin = self.headers.get("Origin")
         if origin and urlparse(origin).netloc != self.headers.get("Host"):
@@ -189,6 +228,10 @@ def main():
     parser.add_argument("--host", default=os.getenv("HOST", "127.0.0.1"))
     parser.add_argument("--port", type=int, default=int(os.getenv("PORT", "8000")))
     args = parser.parse_args()
+    if args.host not in {"127.0.0.1", "localhost", "::1"}:
+        if len(os.getenv("SIGNALDESK_PASSWORD", "")) < 16:
+            parser.error("Network hosting requires SIGNALDESK_PASSWORD of at least 16 characters; "
+                         "use HTTPS at the hosting proxy")
     initialize()
     Handler.accounts, Handler.metadata = load_accounts()
     Handler.loaded_at = time.monotonic()

@@ -6,7 +6,7 @@
 
 `main.py` serves vanilla static UI and same-origin JSON routes on loopback by default. Candidate results are rebuilt from the imported sample on a 60-second cache expiration; SQLite stores researcher disposition/notes, requests/traces and live-call budget reservations in `var/signaldesk.sqlite`. Notes and trace requests are local-workspace data: do not deploy publicly without authentication, access controls, approved retention, and a privacy review. The API validates request size, JSON/content type, same-host Origin for writes, account IDs, status and notes length. CSV export escapes spreadsheet-formula-leading values.
 
-`static/` is a dependency-free responsive workbench with search, observed-country / segment / priority filters, pagination, evidence detail, analyst disposition, explicit attribution caveat, CSV shortlist export, and Activity/AI traces. It does not link to or probe observed ports or IPs. Deployment is deferred; no hosted link is claimed.
+`static/` is a dependency-free responsive workbench with search, observed-country / segment / priority filters, pagination, evidence detail, analyst disposition, explicit attribution caveat, CSV shortlist export, and Activity/AI traces. It does not link to or probe observed ports or IPs. Render deployment is prepared but not executed; no hosted link is claimed.
 
 ## Rules versus LLM
 
@@ -36,4 +36,4 @@ Example planning workload: 250 on-demand triages/day × (350 input tokens × $0.
 * A provider suppression list will miss resellers and can suppress real account domains; current single-domain eligibility is merely a hypothesis.
 * The available data lacks an ICP, firmographics, HQ/territory, buyer, control status, buying signal and outcomes. A richer account score should wait for consented enrichment and label provenance.
 * Score weights are a transparent sales-research heuristic, not inferred or calibrated. Synthetic eval accuracy is not evidence of field performance.
-* Loopback local prototype is not a hardened multiuser service. Its optional public hosting template must never receive real prospects or a live LLM secret before authentication, durable database and secrecy controls exist.
+* Render preparation now includes a shared reviewer Basic-auth gate (HTTPS proxy required), a persistent SQLite disk and secret environment configuration. It is still a take-home demo, not a hardened multiuser service. Personal roles, tenant isolation, login rate limiting, hardened server infrastructure and formal retention policies remain production requirements. See `DEPLOYMENT.md`; no deployment or human/live evaluation is claimed as completed.

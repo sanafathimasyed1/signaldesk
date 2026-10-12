@@ -1,0 +1,12 @@
+.git
+.idea
+.venv
+.env
+var
+__pycache__
+**/__pycache__
+*.sqlite*
+evals
+tests
+docs
+skills

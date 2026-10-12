@@ -1,0 +1,323 @@
+[
+  {
+    "id": "H01",
+    "account_id": "b5c34b41e205b0d0169c",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H02",
+    "account_id": "d3a38979bc8d0524ba80",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H03",
+    "account_id": "a0a96b402efdd728b5e8",
+    "eligible": false,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H04",
+    "account_id": "3e89ee9770b2dd6ecdc3",
+    "eligible": false,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "reported-cve",
+        "kind": "reported-cve",
+        "weight": 5,
+        "evidence_ids": [
+          "ee4777c11bb206e28eba",
+          "deb90c48670c440cc913",
+          "e6f6f75490585059022f",
+          "eb56875c0bb82f427740",
+          "c9dc451bc7bf6b681f2a"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H05",
+    "account_id": "60079274490dde2583d5",
+    "eligible": false,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H06",
+    "account_id": "f8c244382a485d34ba42",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H07",
+    "account_id": "4b1a6aa3076cd203ae6e",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "remote-access",
+        "kind": "remote-access",
+        "weight": 25,
+        "evidence_ids": [
+          "f8c0fe325f1bb857c03e"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H08",
+    "account_id": "b2818302387cb272dc38",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "legacy-tls",
+        "kind": "legacy-tls",
+        "weight": 15,
+        "evidence_ids": [
+          "2aedea74143d36d52dc1"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H09",
+    "account_id": "0e8baa419d37a138a522",
+    "eligible": false,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H10",
+    "account_id": "08e1d26d8197981917fb",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "reported-cve",
+        "kind": "reported-cve",
+        "weight": 5,
+        "evidence_ids": [
+          "aba2fe9ce8a46c58425a"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H11",
+    "account_id": "901f79b97984d4e09adb",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "legacy-tls",
+        "kind": "legacy-tls",
+        "weight": 15,
+        "evidence_ids": [
+          "2b9be841243935db86bc"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H12",
+    "account_id": "3b965157207d9a4b97d6",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H13",
+    "account_id": "09455d5666468f158001",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "data-service",
+        "kind": "data-service",
+        "weight": 30,
+        "evidence_ids": [
+          "45b95aafe3719e9d352a"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H14",
+    "account_id": "0460dccc5b7f9463de7c",
+    "eligible": false,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H15",
+    "account_id": "febebe1e579f0078efe7",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "legacy-tls",
+        "kind": "legacy-tls",
+        "weight": 15,
+        "evidence_ids": [
+          "4d25c5bbf58e897ae7f8"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H16",
+    "account_id": "3e52ab30be8bb462b42e",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "legacy-tls",
+        "kind": "legacy-tls",
+        "weight": 15,
+        "evidence_ids": [
+          "69d594c8ee022c1ce8ed"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H17",
+    "account_id": "b6ba343300f726b08637",
+    "eligible": false,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H18",
+    "account_id": "5968ab27f77c7dd677ee",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H19",
+    "account_id": "22191cab31194448521d",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "legacy-tls",
+        "kind": "legacy-tls",
+        "weight": 15,
+        "evidence_ids": [
+          "214e60ff1c1d4f1293a0"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H20",
+    "account_id": "f353ab9e49786625b436",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "expired-cert",
+        "kind": "expired-cert",
+        "weight": 15,
+        "evidence_ids": [
+          "70730539bf44d7a69583"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H21",
+    "account_id": "96d4844d73b329681fff",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "data-service",
+        "kind": "data-service",
+        "weight": 30,
+        "evidence_ids": [
+          "8007ba807bded0306a7b"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H22",
+    "account_id": "702e94d5d4253a39d96c",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "legacy-tls",
+        "kind": "legacy-tls",
+        "weight": 15,
+        "evidence_ids": [
+          "d17c0a00d7c87ec70cff"
+        ]
+      },
+      {
+        "id": "reported-cve",
+        "kind": "reported-cve",
+        "weight": 5,
+        "evidence_ids": [
+          "d17c0a00d7c87ec70cff"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "H23",
+    "account_id": "d0a2564857743386ff88",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": []
+  },
+  {
+    "id": "H24",
+    "account_id": "4cbfd1f64dc62a57ba5d",
+    "eligible": true,
+    "age_days": 4.1,
+    "ownership_verified": false,
+    "signals": [
+      {
+        "id": "data-service",
+        "kind": "data-service",
+        "weight": 30,
+        "evidence_ids": [
+          "80b1526016d0fbe5cb4e"
+        ]
+      }
+    ]
+  }
+]
